@@ -1,0 +1,11 @@
+{
+  "name": "kisansetu",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": ["apps/*", "shared"],
+  "scripts": {
+    "dev": "concurrently \"npm run dev -w @kisansetu/api\" \"npm run dev -w @kisansetu/web\"",
+    "build": "npm run build -w @kisansetu/api && npm run build -w @kisansetu/web"
+  },
+  "devDependencies": { "concurrently": "^9.1.2" }
+}

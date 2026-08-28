@@ -1,0 +1,6 @@
+node_modules
+dist
+.env
+.env.local
+uploads
+TECH_STACK_PRESENTA*
