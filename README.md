@@ -12,8 +12,9 @@ State-aware agricultural procurement prototype for SIH.
 This is the easiest way to review the prototype. It does not require MongoDB.
 
 ```bash
-npm install
-npm run dev -w @kisansetu/web
+npm install --workspaces=false
+npm run install:apps
+npm run dev:web
 ```
 
 Open `http://localhost:5173/`. Choose a role and use demo OTP `123456`.
@@ -29,8 +30,9 @@ Copy-Item apps/api/.env.example apps/api/.env
 Set a value for `JWT_SECRET` in `apps/api/.env`, start MongoDB, seed the demo database, and run both workspaces:
 
 ```bash
-npm install
-npm run seed -w @kisansetu/api
+npm install --workspaces=false
+npm run install:apps
+npm run seed --prefix apps/api
 npm run dev
 ```
 
@@ -42,7 +44,12 @@ The root build validates both packages:
 npm run build
 ```
 
-The Express/Mongoose API remains in `apps/api`. To run its MongoDB-backed path, configure `apps/api/.env` from `.env.example`, seed it with `npm run seed -w @kisansetu/api`, and start it with `npm run dev -w @kisansetu/api`.
+The install commands intentionally install each app separately. This avoids npm's
+workspace symlink step, which can fail on Windows when a cloned or previously used
+`node_modules` folder contains locked or stale directories. Run all commands from
+the repository root.
+
+The Express/Mongoose API remains in `apps/api`. To run its MongoDB-backed path, configure `apps/api/.env` from `.env.example`, seed it with `npm run seed --prefix apps/api`, and start it with `npm run dev:api`.
 
 ## Demo roles
 

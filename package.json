@@ -4,8 +4,11 @@
   "version": "0.1.0",
   "workspaces": ["apps/*", "shared"],
   "scripts": {
-    "dev": "concurrently \"npm run dev -w @kisansetu/api\" \"npm run dev -w @kisansetu/web\"",
-    "build": "npm run build -w @kisansetu/api && npm run build -w @kisansetu/web"
+    "install:apps": "npm install --prefix apps/api --workspaces=false && npm install --prefix apps/web --workspaces=false",
+    "dev": "concurrently \"npm --prefix apps/api run dev\" \"npm --prefix apps/web run dev\"",
+    "dev:api": "npm --prefix apps/api run dev",
+    "dev:web": "npm --prefix apps/web run dev",
+    "build": "npm --prefix apps/api run build && npm --prefix apps/web run build"
   },
   "devDependencies": { "concurrently": "^9.1.2" }
 }
